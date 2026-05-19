@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>娃哈哈AD钙奶 - 不管几岁，快乐万岁</title>
+<meta name="description" content="一瓶AD钙奶，唤醒藏在心底的童心。娃哈哈AD钙奶，守护每一份童心，一口酸甜，一生快乐。">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f172a;--fg:#f8fafc;--primary:#22c55e;--accent:#fbbf24;
+  --radius:0.625rem;--font-sans:'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;
+}
+html,body{height:100%;width:100%;overflow:hidden;font-family:var(--font-sans);background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
+img{display:block;max-width:100%}
+
+/* ===== Scene Container ===== */
+#app{position:relative;height:100vh;width:100vw;overflow:hidden;background:#0f172a}
+.scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.scene-enter{animation:sceneIn 0.5s ease-out forwards}
+.scene-exit{animation:sceneOut 0.5s ease-in forwards}
+@keyframes sceneIn{from{opacity:0;transform:scale(1.1)}to{opacity:1;transform:scale(1)}}
+@keyframes sceneOut{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(0.9)}}
+
+/* ===== Scene 0: Opening ===== */
+.scene0-bg{position:absolute;inset:0}
+.scene0-bg img{width:100%;height:100%;object-fit:cover}
+.scene0-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,0.7),transparent,rgba(15,23,42,0.3))}
+
+.scene0-bottle{position:absolute;cursor:pointer;left:25%;top:35%;width:120px;height:180px;z-index:10}
+.scene0-bottle-pulse{position:absolute;inset:0;border-radius:50%;background:rgba(251,191,36,0.2);animation:pulse2 2s ease-in-out infinite}
+@keyframes pulse2{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.5);opacity:0}}
+.scene0-bottle:hover{transform:scale(1.05)}
+.scene0-bottle:active{transform:scale(0.95)}
+
+.scene0-hint{position:absolute;left:20%;top:60%;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp 0.5s 1s ease-out both;z-index:10}
+.scene0-hint-icon{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.2);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;animation:bounce 1s ease-in-out infinite}
+.scene0-hint-text{border-radius:999px;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);padding:8px 16px;font-size:14px;color:#fff;white-space:nowrap}
+
+.scene0-text{position:absolute;bottom:96px;left:0;right:0;text-align:center;animation:fadeUp 0.5s 0.5s ease-out both;z-index:10}
+.scene0-text .sub{font-size:18px;color:rgba(253,230,138,0.9);animation:pulseText 2s ease-in-out infinite;margin-bottom:16px}
+.scene0-text .main{font-size:24px;font-weight:500;color:#fff;padding:0 32px}
+@keyframes pulseText{0%,100%{opacity:0.7}50%{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+.scene0-sound{position:absolute;left:16px;top:16px;display:flex;align-items:center;gap:8px;border-radius:999px;background:rgba(0,0,0,0.3);padding:6px 12px;font-size:12px;color:rgba(255,255,255,0.7);backdrop-filter:blur(4px);z-index:10;animation:fadeIn 0.5s 2s ease-out both}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.bars{display:flex;gap:2px;align-items:center;animation:barsPulse 1.5s ease-in-out infinite}
+.bar{width:2px;border-radius:999px;background:#fbbf24}.bar-1{height:6px}.bar-2{height:10px}.bar-3{height:6px}
+@keyframes barsPulse{0%,100%{opacity:0.5}50%{opacity:1}}
+
+/* ===== Magic Overlay ===== */
+.magic-overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(254,243,199,0.9),rgba(255,255,255,0.95),rgba(220,252,231,0.9));animation:magicIn 0.3s ease-out}
+@keyframes magicIn{from{opacity:0}to{opacity:1}}
+.magic-overlay-out{animation:magicOut 0.3s ease-in forwards}
+@keyframes magicOut{from{opacity:1}to{opacity:0}}
+.magic-sparkle{font-size:64px;animation:magicSpin 0.8s ease-in-out}
+@keyframes magicSpin{0%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.2) rotate(180deg)}100%{transform:scale(1) rotate(360deg)}}
+
+/* ===== Progress Dots ===== */
+.progress-bar{position:fixed;bottom:24px;left:50%;z-index:40;display:flex;gap:8px;transform:translateX(-50%)}
+.progress-dot{height:8px;border-radius:999px;transition:all 0.3s}
+.progress-dot-active{width:32px;background:var(--primary);animation:dotPulse 1.5s ease-in-out infinite}
+.progress-dot-done{width:8px;background:rgb(134,239,172)}
+.progress-dot-pending{width:8px;background:rgba(255,255,255,0.3)}
+@keyframes dotPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+
+/* ===== Audio Button ===== */
+.audio-btn{position:fixed;right:16px;top:16px;z-index:50;display:flex;align-items:center;gap:8px;border-radius:999px;background:rgba(0,0,0,0.4);border:none;color:#fff;cursor:pointer;backdrop-filter:blur(4px);transition:transform 0.15s;font-family:inherit}
+.audio-btn:hover{transform:scale(1.05)}.audio-btn:active{transform:scale(0.95)}
+.audio-btn-init{padding:8px 16px;animation:slideDown 0.5s 0.5s ease-out both}
+.audio-btn-toggle{width:40px;height:40px;padding:0;display:flex;align-items:center;justify-content:center;animation:slideDown 0.5s ease-out both}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.audio-btn svg{width:20px;height:20px}
+.audio-btn span{font-size:13px;white-space:nowrap}
+
+.volume-indicator{position:absolute;right:0;top:52px;display:flex;align-items:center;gap:8px;border-radius:999px;background:rgba(0,0,0,0.4);padding:6px 12px;font-size:12px;color:#fff;backdrop-filter:blur(4px);animation:fadeIn 0.2s ease-out}
+
+/* ===== Particles ===== */
+.particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;border-radius:50%;animation:particleFloat 3s ease-in-out infinite}
+@keyframes particleFloat{0%{opacity:0;transform:translateY(0) scale(0)}10%{opacity:1}50%{transform:translateY(-30px) translateX(10px) scale(1.5)}90%{opacity:0}100%{opacity:0;transform:translateY(0) scale(0)}}
+
+.orb{position:absolute;border-radius:50%;animation:orbPulse 2s ease-in-out infinite}
+@keyframes orbPulse{0%,100%{transform:scale(1);opacity:0.6}50%{transform:scale(1.3);opacity:1}}
+
+.sparkle-container{position:absolute;pointer-events:none;animation:sparklePop 0.6s ease-out forwards}
+@keyframes sparklePop{0%{transform:scale(0);opacity:1}50%{transform:scale(1.5);opacity:1}100%{transform:scale(0);opacity:0}}
+.sparkle-svg{width:40px;height:40px;animation:sparkleRotate 1s linear infinite}
+@keyframes sparkleRotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+.bubble{position:absolute;bottom:0;border-radius:50%;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);animation:bubbleRise 5s ease-out infinite}
+@keyframes bubbleRise{0%{transform:translateY(0) translateX(0);opacity:0}20%{opacity:0.6}100%{transform:translateY(calc(-100vh - 100px)) translateX(20px);opacity:0}}
+
+/* ===== Orb Glow ===== */
+.glow-magic{position:absolute;inset:0;background:linear-gradient(135deg,rgba(253,230,138,0.3),transparent,rgba(187,247,208,0.3));animation:glowFlash 1.5s ease-out forwards;pointer-events:none}
+@keyframes glowFlash{0%{opacity:0}30%{opacity:0.8}100%{opacity:0.4}}
+
+/* ===== Scene 1: Time Meeting ===== */
+.scene1-bg{position:absolute;inset:0}
+.scene1-bg img{width:100%;height:100%;object-fit:cover}
+.scene1-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(120,53,15,0.4),transparent,rgba(254,243,199,0.2))}
+.scene1-warp{position:absolute;inset:0;pointer-events:none;animation:warpPulse 3s ease-in-out infinite}
+@keyframes warpPulse{0%,100%{opacity:0}50%{opacity:0.3}}
+.scene1-warp-inner{position:absolute;inset:0;background:radial-gradient(rgba(253,230,138,0.2),transparent,transparent)}
+
+.dialogue{position:absolute;max-width:200px}
+.dialogue-bubble{position:relative;border-radius:16px;padding:12px 16px;box-shadow:0 4px 20px rgba(0,0,0,0.1);animation:dialogueIn 0.4s ease-out both}
+@keyframes dialogueIn{from{opacity:0;transform:scale(0.8) translateX(20px)}to{opacity:1;transform:scale(1) translateX(0)}}
+.dialogue-bubble p{font-size:14px;font-weight:500;color:#1e293b}
+.dialogue-bubble::after{content:'';position:absolute;top:50%;width:16px;height:16px;transform:translateY(-50%) rotate(45deg)}
+.dialogue-label{margin-top:8px;text-align:center;font-size:12px;color:#fef3c7}
+
+.dialogue-right{right:32px;top:33%}
+.dialogue-right .dialogue-bubble{background:rgba(255,255,255,0.95);backdrop-filter:blur(4px)}
+.dialogue-right .dialogue-bubble::after{left:-8px;background:rgba(255,255,255,0.95)}
+.dialogue-left{left:32px;top:50%}
+.dialogue-left .dialogue-bubble{background:rgba(220,252,231,0.95);backdrop-filter:blur(4px)}
+.dialogue-left .dialogue-bubble::after{right:-8px;background:rgba(220,252,231,0.95)}
+.dialogue-left .dialogue-label{color:#fef3c7}
+
+.scene1-milk-btn{position:absolute;bottom:128px;left:50%;transform:translateX(-50%);cursor:pointer;animation:fadeUp 0.5s ease-out both}
+.scene1-milk-btn:hover{transform:translateX(-50%) scale(1.05)}
+.scene1-milk-btn:active{transform:translateX(-50%) scale(0.95)}
+.scene1-milk-box{width:64px;height:96px;border-radius:8px;background:rgba(255,255,255,0.2);padding:8px;overflow:hidden;backdrop-filter:blur(4px);margin:0 auto;animation:glowPulse 1.5s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 20px rgba(255,215,0,0.3)}50%{box-shadow:0 0 40px rgba(255,215,0,0.6)}}
+.scene1-milk-box img{width:100%;height:100%;object-fit:contain}
+.scene1-milk-text{display:inline-block;border-radius:999px;background:rgba(251,191,36,0.8);padding:8px 16px;font-size:14px;font-weight:500;color:#fff;margin-top:12px;animation:bounce 1s ease-in-out infinite}
+
+.scene1-float{position:absolute;font-size:28px;animation:floatItem 3s ease-in-out infinite}
+@keyframes floatItem{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(10deg)}}
+.scene1-float2{position:absolute;font-size:24px;animation:floatItem2 2.5s ease-in-out infinite}
+@keyframes floatItem2{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(-15deg)}}
+.scene1-bottom-text{position:absolute;bottom:32px;left:0;right:0;text-align:center;animation:fadeIn 0.5s 0.5s ease-out both}
+.scene1-bottom-text p{font-size:20px;font-weight:500;color:#fff;padding:0 32px;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
+.scene1-sound{position:absolute;left:16px;top:16px;display:flex;align-items:center;gap:8px;border-radius:999px;background:rgba(0,0,0,0.3);padding:6px 12px;font-size:12px;color:rgba(255,255,255,0.7);backdrop-filter:blur(4px);z-index:10;animation:fadeIn 0.5s 1.5s ease-out both}
+.scene1-sound .bar{background:#fbbf24}
+
+/* ===== Scene 2: Play Together ===== */
+.scene2-slider{position:absolute;inset:0;display:flex;overflow:hidden;cursor:grab}
+.scene2-slider:active{cursor:grabbing}
+.scene2-slide{position:relative;flex:0 0 100%;height:100%;transition:transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275)}
+.scene2-slide img{width:100%;height:100%;object-fit:cover}
+.scene2-slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(255,255,255,0.3),transparent,rgba(255,255,255,0.1))}
+
+.scene2-sticker{position:absolute;font-size:24px;animation:stickerFloat 3s ease-in-out infinite}
+@keyframes stickerFloat{0%{transform:translateY(0) rotate(0) scale(1)}50%{transform:translateY(-20px) rotate(10deg) scale(1.1)}100%{transform:translateY(0) rotate(0) scale(1)}}
+
+.scene2-airplane{position:absolute;font-size:36px;z-index:5;animation:airplaneFly 4s ease-in-out infinite}
+@keyframes airplaneFly{0%{transform:translateX(-100%) translateY(60%) rotate(-30deg)}50%{transform:translateX(50%) translateY(20%) rotate(10deg)}100%{transform:translateX(110%) translateY(40%) rotate(-20deg)}}
+
+.scene2-dots{position:absolute;bottom:112px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:10}
+.scene2-dot{width:12px;height:12px;border-radius:50%;border:none;cursor:pointer;transition:all 0.3s;padding:0}
+.scene2-dot-active{background:var(--primary);width:24px}
+.scene2-dot-inactive{background:rgba(255,255,255,0.5)}
+.scene2-dot:active{transform:scale(0.9)}
+
+.scene2-swipe-hint{position:absolute;top:50%;right:16px;display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);animation:swipeHint 1s ease-in-out infinite;z-index:5}
+@keyframes swipeHint{0%,100%{transform:translateX(0);opacity:1}50%{transform:translateX(-10px);opacity:0.7}}
+.scene2-swipe-hint span{font-size:14px}
+.scene2-swipe-hint svg{width:20px;height:20px}
+
+.scene2-title{position:absolute;top:32px;left:0;right:0;text-align:center;z-index:10;animation:fadeUp 0.3s 0s ease-out both}
+.scene2-title-inner{display:inline-block;border-radius:999px;background:rgba(255,255,255,0.8);padding:8px 24px;backdrop-filter:blur(4px);box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.scene2-title-inner p{font-size:14px;font-weight:500;color:#374151}
+
+.scene2-continue{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);z-index:10;animation:fadeUp 0.5s 1s ease-out both}
+.scene2-continue-btn{border:none;border-radius:999px;background:linear-gradient(to right,#22c55e,#16a34a);padding:12px 32px;font-size:16px;font-weight:500;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(34,197,94,0.3);font-family:inherit;transition:transform 0.15s}
+.scene2-continue-btn:hover{transform:scale(1.05);box-shadow:0 10px 30px rgba(34,197,94,0.4)}
+.scene2-continue-btn:active{transform:scale(0.95)}
+
+.scene2-bottom-text{position:absolute;bottom:128px;left:0;right:0;text-align:center;animation:fadeIn 0.5s 0.5s ease-out both;z-index:5}
+.scene2-bottom-text p{font-size:20px;font-weight:500;color:#374151;padding:0 32px;text-shadow:0 1px 2px rgba(0,0,0,0.1)}
+
+.scene2-sound{position:absolute;left:16px;top:16px;display:flex;align-items:center;gap:8px;border-radius:999px;background:rgba(0,0,0,0.3);padding:6px 12px;font-size:12px;color:rgba(255,255,255,0.7);backdrop-filter:blur(4px);z-index:10;animation:fadeIn 0.5s 0.5s ease-out both}
+.scene2-sound .bar{background:var(--primary)}
+
+/* ===== Scene 3: Magic Return ===== */
+.scene3-dissolve{position:absolute;inset:0;z-index:20;background:linear-gradient(135deg,rgba(254,243,199,0.8),rgba(255,255,255,0.6),rgba(220,252,231,0.8));animation:dissolveOut 1.5s ease-out forwards;pointer-events:none}
+@keyframes dissolveOut{from{opacity:1}to{opacity:0}}
+
+.scene3-bg{position:absolute;inset:0;animation:scene3BgIn 1s 0.5s ease-out both}
+@keyframes scene3BgIn{from{opacity:0;transform:scale(1.1)}to{opacity:1;transform:scale(1)}}
+.scene3-bg img{width:100%;height:100%;object-fit:cover}
+.scene3-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(255,255,255,0.2),transparent,rgba(254,243,199,0.3))}
+.scene3-warm{position:absolute;inset:0;pointer-events:none;animation:scene3WarmIn 1s 2s ease-out both}
+@keyframes scene3WarmIn{from{opacity:0}to{opacity:0.2}}
+.scene3-warm-inner{position:absolute;inset:0;background:radial-gradient(rgba(254,243,199,0.4),transparent,transparent)}
+
+.scene3-colleague{position:absolute;right:24px;top:33%;max-width:220px;z-index:10;animation:colleagueIn 0.4s ease-out both}
+@keyframes colleagueIn{from{opacity:0;transform:translateX(30px) scale(0.9)}to{opacity:1;transform:translateX(0) scale(1)}}
+.scene3-colleague-bubble{position:relative;border-radius:16px;padding:12px 16px;background:rgba(255,255,255,0.95);backdrop-filter:blur(4px);box-shadow:0 4px 20px rgba(0,0,0,0.1);animation:colleagueGlow 2s ease-in-out infinite}
+@keyframes colleagueGlow{0%,100%{box-shadow:0 4px 20px rgba(0,0,0,0.1)}50%{box-shadow:0 8px 30px rgba(255,215,0,0.2)}}
+.scene3-colleague-bubble p{font-size:14px;font-weight:500;color:#1e293b}
+.scene3-colleague-bubble::after{content:'';position:absolute;top:50%;left:-8px;width:16px;height:16px;transform:translateY(-50%) rotate(45deg);background:rgba(255,255,255,0.95)}
+.scene3-colleague-label{margin-top:8px;text-align:center;font-size:12px;color:#4b5563}
+
+.scene3-expression{position:absolute;left:24px;top:25%;animation:exprIn 0.5s 0.5s ease-out both;z-index:5}
+@keyframes exprIn{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+.scene3-expression-inner{border-radius:999px;background:rgba(254,243,199,0.9);padding:6px 12px;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,0.1);animation:bounce 2s ease-in-out infinite;white-space:nowrap;color:#1e293b}
+
+.scene3-receive{position:absolute;bottom:128px;left:50%;transform:translateX(-50%);cursor:pointer;z-index:10;animation:fadeUp 0.5s ease-out both}
+.scene3-receive:hover{transform:translateX(-50%) scale(1.05)}
+.scene3-receive:active{transform:translateX(-50%) scale(0.95)}
+.scene3-receive-box{width:56px;height:80px;border-radius:8px;background:rgba(255,255,255,0.3);padding:8px;overflow:hidden;backdrop-filter:blur(4px);margin:0 auto;animation:receiveSwing 1.5s ease-in-out infinite}
+@keyframes receiveSwing{0%,100%{transform:rotate(-5deg);box-shadow:0 0 15px rgba(34,197,94,0.3)}50%{transform:rotate(5deg);box-shadow:0 0 30px rgba(34,197,94,0.5)}}
+.scene3-receive-box img{width:100%;height:100%;object-fit:contain}
+.scene3-receive-text{display:inline-block;border-radius:999px;background:rgba(34,197,94,0.9);padding:10px 20px;font-size:14px;font-weight:500;color:#fff;margin-top:12px;animation:receivePulse 1s ease-in-out infinite}
+@keyframes receivePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+.scene3-bottom-text{position:absolute;bottom:32px;left:0;right:0;text-align:center;animation:fadeIn 0.5s 2s ease-out both;z-index:5}
+.scene3-bottom-text p{font-size:20px;font-weight:500;color:#374151;padding:0 32px;text-shadow:0 1px 2px rgba(0,0,0,0.1)}
+
+.scene3-sound{position:absolute;left:16px;top:16px;display:flex;align-items:center;gap:8px;border-radius:999px;background:rgba(255,255,255,0.8);padding:6px 12px;font-size:12px;color:#4b5563;backdrop-filter:blur(4px);z-index:10;animation:fadeIn 0.5s 1s ease-out both}
+.scene3-sound .bar{background:#f59e0b}
+
+/* ===== Scene 4: Ending ===== */
+.scene4-bg{position:absolute;inset:0}
+.scene4-bg img{width:100%;height:100%;object-fit:cover}
+.scene4-overlay{position:absolute;inset:0;background:linear-gradient(to top,#fff,rgba(255,255,255,0.6),transparent)}
+.scene4-hearts{position:absolute;inset:0;pointer-events:none}
+.scene4-heart{position:absolute;font-size:20px;animation:heartFloat 3s ease-in-out infinite}
+@keyframes heartFloat{0%{transform:translateY(0) scale(0.5);opacity:0}30%{opacity:1}100%{transform:translateY(-200px) scale(1);opacity:0}}
+
+.scene4-card{position:relative;z-index:10;margin:0 16px;display:flex;flex-direction:column;align-items:center;border-radius:24px;background:rgba(255,255,255,0.95);padding:40px 32px;max-width:340px;box-shadow:0 20px 60px rgba(0,0,0,0.15);backdrop-filter:blur(4px);animation:cardIn 0.6s 0.5s ease-out both}
+@keyframes cardIn{from{opacity:0;transform:translateY(50px) scale(0.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+.scene4-product{position:relative;width:112px;height:160px;margin-bottom:24px;animation:productFloat 2s ease-in-out infinite}
+@keyframes productFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.scene4-product img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 20px rgba(0,0,0,0.2))}
+.scene4-product-glow{position:absolute;inset:0;z-index:-1;border-radius:50%;background:rgba(253,230,138,0.3);filter:blur(20px);animation:glowPulse2 2s ease-in-out infinite}
+@keyframes glowPulse2{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.3);opacity:0.8}}
+
+.scene4-title{font-size:24px;font-weight:700;color:#1e293b;text-align:center;margin-bottom:8px;animation:fadeIn 0.5s 0.8s ease-out both}
+.scene4-subtitle{font-size:14px;color:#6b7280;text-align:center;margin-bottom:24px;animation:fadeIn 0.5s 1s ease-out both}
+.scene4-tag{border-radius:999px;background:linear-gradient(to right,#22c55e,#16a34a);padding:8px 24px;margin-bottom:32px;animation:fadeIn 0.5s 1.2s ease-out both}
+.scene4-tag p{text-align:center;font-size:14px;font-weight:500;color:#fff}
+.scene4-actions{display:flex;width:100%;gap:16px}
+.scene4-btn-share,.scene4-btn-buy{flex:1;border-radius:999px;padding:12px 0;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;transition:transform 0.15s}
+.scene4-btn-share{background:#fff;border:2px solid var(--primary);color:var(--primary)}
+.scene4-btn-share:hover{background:#f0fdf4;transform:scale(1.02)}
+.scene4-btn-share:active{transform:scale(0.98)}
+.scene4-btn-buy{background:linear-gradient(to right,#ef4444,#dc2626);border:none;color:#fff;box-shadow:0 4px 12px rgba(239,68,68,0.3)}
+.scene4-btn-buy:hover{transform:scale(1.02);box-shadow:0 6px 20px rgba(239,68,68,0.4)}
+.scene4-btn-buy:active{transform:scale(0.98)}
+.scene4-btn-share:disabled{opacity:0.7;cursor:default}
+
+.scene4-footer{position:absolute;bottom:32px;display:flex;flex-direction:column;align-items:center;gap:8px;z-index:10;animation:fadeIn 0.5s 2s ease-out both}
+.scene4-footer p{font-size:12px;color:#9ca3af}
+.scene4-social{display:flex;gap:16px;color:#9ca3af}
+.scene4-social span{cursor:pointer;font-size:20px;transition:color 0.2s}
+.scene4-social span:hover{color:var(--primary)}
+.scene4-replay{position:absolute;left:16px;top:16px;z-index:10;border-radius:999px;background:rgba(255,255,255,0.8);border:none;padding:6px 12px;font-size:12px;color:#4b5563;cursor:pointer;backdrop-filter:blur(4px);box-shadow:0 1px 4px rgba(0,0,0,0.1);font-family:inherit;animation:fadeIn 0.5s 2.5s ease-out both;transition:transform 0.15s}
+.scene4-replay:hover{transform:scale(1.05)}.scene4-replay:active{transform:scale(0.95)}
+
+.scene4-sound{position:absolute;right:64px;top:16px;display:flex;align-items:center;gap:8px;border-radius:999px;background:rgba(255,255,255,0.8);padding:6px 12px;font-size:12px;color:#4b5563;backdrop-filter:blur(4px);z-index:10;animation:fadeIn 0.5s 1s ease-out both}
+.scene4-sound .bar{background:var(--primary)}
+
+/* ===== Shared ===== */
+.hidden{display:none !important}
+.visible{display:flex}
+.bg-radial{background:radial-gradient(rgba(253,230,138,0.2),transparent,transparent)}
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+// ============================================================
+// AUDIO ENGINE
+// ============================================================
+const AudioEngine = (() => {
+  let ctx = null;
+  let bgMusic = null;
+  let isMuted = false;
+  let isReady = false;
+  let bgVolume = 0.5;
+  let sfxVolume = 0.7;
+  let listeners = [];
+
+  const notify = () => listeners.forEach(fn => fn());
+
+  function init() {
+    if (ctx) return;
+    try {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      bgMusic = createBackgroundMusic(ctx);
+      bgMusic.start();
+      isReady = true;
+      notify();
+    } catch(e) {
+      console.error('Audio init failed:', e);
+    }
+  }
+
+  function playSound(type) {
+    if (isMuted || !ctx) return;
+    if (ctx.state === 'suspended') ctx.resume();
+    createSound(ctx, type);
+  }
+
+  function toggleMute() {
+    isMuted = !isMuted;
+    if (bgMusic) bgMusic.setVolume(isMuted ? 0 : bgVolume);
+    notify();
+  }
+
+  function setBgVolume(v) { bgVolume = v; if (bgMusic) bgMusic.setVolume(v); }
+  function subscribe(fn) { listeners.push(fn); return () => { listeners = listeners.filter(l => l !== fn); }; }
+
+  return { init, playSound, toggleMute, setBgVolume, get isMuted() { return isMuted; }, get isReady() { return isReady; }, subscribe };
+})();
+
+function createSound(audioCtx, type) {
+  const now = audioCtx.currentTime;
+  switch(type) {
+    case 'pop': {
+      const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+      osc.type = 'sine'; osc.frequency.setValueAtTime(800, now); osc.frequency.exponentialRampToValueAtTime(400, now+0.1);
+      gain.gain.setValueAtTime(0.3, now); gain.gain.exponentialRampToValueAtTime(0.01, now+0.15);
+      osc.connect(gain); gain.connect(audioCtx.destination); osc.start(now); osc.stop(now+0.15);
+      setTimeout(() => {
+        const o2 = audioCtx.createOscillator(), g2 = audioCtx.createGain();
+        o2.type = 'sine'; o2.frequency.setValueAtTime(600, audioCtx.currentTime); o2.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime+0.08);
+        g2.gain.setValueAtTime(0.25, audioCtx.currentTime); g2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime+0.1);
+        o2.connect(g2); g2.connect(audioCtx.destination); o2.start(audioCtx.currentTime); o2.stop(audioCtx.currentTime+0.1);
+      }, 100);
+      break;
+    }
+    case 'magic':
+      for (let i=0;i<5;i++) {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain(), f = audioCtx.createBiquadFilter();
+        o.type = 'sine'; o.frequency.setValueAtTime(1200+i*200, now+i*0.1); o.frequency.exponentialRampToValueAtTime(800+i*100, now+i*0.1+0.3);
+        f.type = 'highpass'; f.frequency.setValueAtTime(500, now);
+        g.gain.setValueAtTime(0, now+i*0.1); g.gain.linearRampToValueAtTime(0.15, now+i*0.1+0.05); g.gain.exponentialRampToValueAtTime(0.01, now+i*0.1+0.3);
+        o.connect(f); f.connect(g); g.connect(audioCtx.destination); o.start(now+i*0.1); o.stop(now+i*0.1+0.35);
+      }
+      break;
+    case 'sparkle':
+      [2000,2400,2800,3200].forEach((freq,i) => {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.setValueAtTime(freq, now+i*0.05);
+        g.gain.setValueAtTime(0.1, now+i*0.05); g.gain.exponentialRampToValueAtTime(0.001, now+i*0.05+0.2);
+        o.connect(g); g.connect(audioCtx.destination); o.start(now+i*0.05); o.stop(now+i*0.05+0.25);
+      });
+      break;
+    case 'transition': {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain(), f = audioCtx.createBiquadFilter();
+      o.type = 'triangle'; o.frequency.setValueAtTime(200, now); o.frequency.linearRampToValueAtTime(800, now+0.4); o.frequency.linearRampToValueAtTime(400, now+0.8);
+      f.type = 'lowpass'; f.frequency.setValueAtTime(1000, now); f.frequency.linearRampToValueAtTime(3000, now+0.4); f.frequency.linearRampToValueAtTime(500, now+0.8);
+      g.gain.setValueAtTime(0, now); g.gain.linearRampToValueAtTime(0.2, now+0.1); g.gain.linearRampToValueAtTime(0.15, now+0.5); g.gain.exponentialRampToValueAtTime(0.01, now+0.8);
+      o.connect(f); f.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+0.85);
+      break;
+    }
+    case 'click': {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type = 'sine'; o.frequency.setValueAtTime(1000, now); o.frequency.exponentialRampToValueAtTime(500, now+0.05);
+      g.gain.setValueAtTime(0.2, now); g.gain.exponentialRampToValueAtTime(0.01, now+0.05);
+      o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+0.06);
+      break;
+    }
+    case 'laugh':
+      [523,659,784,880,784,659].forEach((freq,i) => {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.setValueAtTime(freq, now+i*0.08);
+        g.gain.setValueAtTime(0.12, now+i*0.08); g.gain.exponentialRampToValueAtTime(0.01, now+i*0.08+0.1);
+        o.connect(g); g.connect(audioCtx.destination); o.start(now+i*0.08); o.stop(now+i*0.08+0.12);
+      });
+      break;
+    case 'swipe': {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type = 'sine'; o.frequency.setValueAtTime(400, now); o.frequency.linearRampToValueAtTime(800, now+0.15);
+      g.gain.setValueAtTime(0.1, now); g.gain.exponentialRampToValueAtTime(0.01, now+0.15);
+      o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+0.18);
+      break;
+    }
+    case 'success':
+      [523,659,784,1047].forEach((freq,i) => {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.setValueAtTime(freq, now+i*0.12);
+        g.gain.setValueAtTime(0.15, now+i*0.12); g.gain.setValueAtTime(0.15, now+i*0.12+0.1); g.gain.exponentialRampToValueAtTime(0.01, now+i*0.12+0.25);
+        o.connect(g); g.connect(audioCtx.destination); o.start(now+i*0.12); o.stop(now+i*0.12+0.3);
+      });
+      break;
+    case 'ambient': {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain(), f = audioCtx.createBiquadFilter();
+      o.type = 'sine'; o.frequency.setValueAtTime(220, now);
+      f.type = 'lowpass'; f.frequency.setValueAtTime(300, now);
+      g.gain.setValueAtTime(0, now); g.gain.linearRampToValueAtTime(0.05, now+0.5); g.gain.setValueAtTime(0.05, now+2); g.gain.linearRampToValueAtTime(0, now+3);
+      o.connect(f); f.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+3.5);
+      break;
+    }
+  }
+}
+
+function createBackgroundMusic(audioCtx) {
+  let isPlaying = false, masterGain = null, intervalId = null;
+  const melodyNotes = [
+    {freq:523,dur:0.5},{freq:587,dur:0.5},{freq:659,dur:0.75},{freq:523,dur:0.25},
+    {freq:698,dur:0.5},{freq:659,dur:0.5},{freq:587,dur:0.75},{freq:523,dur:0.25},
+    {freq:493,dur:0.5},{freq:523,dur:0.5},{freq:587,dur:0.75},{freq:659,dur:0.5},{freq:523,dur:0.75}
+  ];
+  const chordProgressions = [
+    [261,329,392],[293,369,440],[329,415,493],[349,440,523],[392,493,587],[261,329,392]
+  ];
+  function playMelody() {
+    if (!isPlaying) return;
+    let time = audioCtx.currentTime;
+    melodyNotes.forEach(note => {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type = 'sine'; o.frequency.setValueAtTime(note.freq, time);
+      g.gain.setValueAtTime(0, time); g.gain.linearRampToValueAtTime(0.08, time+0.05); g.gain.setValueAtTime(0.08, time+note.dur*0.7); g.gain.linearRampToValueAtTime(0, time+note.dur);
+      o.connect(g); g.connect(masterGain); o.start(time); o.stop(time+note.dur+0.1);
+      time += note.dur * 0.8;
+    });
+  }
+  function playChords() {
+    if (!isPlaying) return;
+    let time = audioCtx.currentTime;
+    chordProgressions.forEach(chord => {
+      chord.forEach(freq => {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'triangle'; o.frequency.setValueAtTime(freq/2, time);
+        g.gain.setValueAtTime(0, time); g.gain.linearRampToValueAtTime(0.03, time+0.1); g.gain.setValueAtTime(0.03, time+1.8); g.gain.linearRampToValueAtTime(0, time+2);
+        o.connect(g); g.connect(masterGain); o.start(time); o.stop(time+2.2);
+      });
+      time += 2;
+    });
+  }
+  return {
+    start() {
+      if (isPlaying) return;
+      isPlaying = true;
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+      masterGain.connect(audioCtx.destination);
+      playMelody(); playChords();
+      intervalId = setInterval(() => { playMelody(); playChords(); }, 12000);
+    },
+    stop() {
+      isPlaying = false;
+      if (intervalId) { clearInterval(intervalId); intervalId = null; }
+    },
+    setVolume(v) { if (masterGain) masterGain.gain.setValueAtTime(v, audioCtx.currentTime); }
+  };
+}
+
+// ============================================================
+// PARTICLE FACTORIES
+// ============================================================
+function createParticles(container, count, colors) {
+  for (let i=0;i<count;i++) {
+    const el = document.createElement('div');
+    el.className = 'particle';
+    const size = Math.random()*8+4, color = colors[Math.floor(Math.random()*colors.length)];
+    Object.assign(el.style, {
+      left: Math.random()*100+'%', top: Math.random()*100+'%', width: size+'px', height: size+'px',
+      backgroundColor: color, boxShadow: `0 0 ${size*2}px ${color}`,
+      animationDuration: (Math.random()*3+2)+'s', animationDelay: Math.random()*2+'s'
+    });
+    container.appendChild(el);
+  }
+}
+
+function createBubbles(container, count) {
+  for (let i=0;i<count;i++) {
+    const el = document.createElement('div');
+    el.className = 'bubble';
+    const size = Math.random()*20+10;
+    Object.assign(el.style, {
+      left: Math.random()*100+'%', width: size+'px', height: size+'px',
+      animationDuration: (Math.random()*4+3)+'s', animationDelay: Math.random()*3+'s'
+    });
+    container.appendChild(el);
+  }
+}
+
+function createOrb(container, cls) {
+  const el = document.createElement('div');
+  el.className = 'orb '+cls;
+  Object.assign(el.style, {
+    background: 'radial-gradient(circle,rgba(255,215,0,0.8) 0%,rgba(255,165,0,0.4) 50%,transparent 70%)',
+    filter: 'blur(2px)'
+  });
+  container.appendChild(el);
+}
+
+// ============================================================
+// SCENE BUILDER - Scene 0: Opening
+// ============================================================
+function buildScene0(onNext) {
+  const div = document.createElement('div');
+  div.className = 'scene';
+  div.innerHTML = `
+    <div class="scene0-bg">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260518104226_14_1146-28ORiOL3gNiXQ6KWjJPM74zXvQDlc4.png" alt="深夜办公室">
+      <div class="scene0-overlay"></div>
+    </div>
+    <div class="scene0-bottle" id="s0-bottle">
+      <div class="scene0-bottle-pulse" id="s0-pulse"></div>
+    </div>
+    <div class="scene0-hint" id="s0-hint">
+      <div class="scene0-hint-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
+        </svg>
+      </div>
+      <span class="scene0-hint-text">点击瓶盖，触发魔法</span>
+    </div>
+    <div class="scene0-text">
+      <p class="sub">深夜的办公室，疲惫悄然袭来...</p>
+      <p class="main">一瓶AD钙奶，唤醒藏在心底的童心</p>
+    </div>
+    <div class="scene0-sound" style="display:none" id="s0-sound">
+      <div class="bars"><span class="bar bar-1"></span><span class="bar bar-2"></span><span class="bar bar-3"></span></div>
+      <span>开盖啵啵声 + 魔法微光声</span>
+    </div>
+    <div id="s0-particles" class="particles"></div>
+    <div id="s0-glow" class="hidden glow-magic"></div>
+    <div id="s0-orbs"></div>
+  `;
+
+  const bottle = div.querySelector('#s0-bottle');
+  const hint = div.querySelector('#s0-hint');
+  const pulse = div.querySelector('#s0-pulse');
+  const orbsContainer = div.querySelector('#s0-orbs');
+  const particlesDiv = div.querySelector('#s0-particles');
+  const glowDiv = div.querySelector('#s0-glow');
+  const soundEl = div.querySelector('#s0-sound');
+
+  createOrb(orbsContainer, 'scene0-orb');
+  orbsContainer.querySelector('.scene0-orb').style.cssText += ';left:-8px;top:0;width:16px;height:16px';
+  createOrb(orbsContainer, 'scene0-orb2');
+  orbsContainer.querySelector('.scene0-orb2').style.cssText += ';right:-4px;top:25%;width:12px;height:12px';
+  createOrb(orbsContainer, 'scene0-orb3');
+  orbsContainer.querySelector('.scene0-orb3').style.cssText += ';left:50%;top:-16px;width:20px;height:20px';
+
+  let glowing = false;
+  bottle.addEventListener('click', () => {
+    if (glowing) return;
+    glowing = true;
+    hint.style.display = 'none';
+    soundEl.style.display = 'flex';
+    if (AudioEngine.isReady) {
+      AudioEngine.playSound('pop');
+      setTimeout(() => AudioEngine.playSound('magic'), 200);
+      setTimeout(() => AudioEngine.playSound('sparkle'), 600);
+    }
+    glowDiv.classList.remove('hidden');
+    createParticles(particlesDiv, 60, ['#FFD700','#FFA500','#FFFFFF','#90EE90']);
+    pulse.style.animation = 'pulseOut 1.5s ease-out forwards';
+    const style = document.createElement('style');
+    style.textContent = '@keyframes pulseOut{0%{transform:scale(1);opacity:1}100%{transform:scale(3);opacity:0}}';
+    document.head.appendChild(style);
+    setTimeout(() => onNext(), 1500);
+  });
+
+  return div;
+}
+
+// ============================================================
+// SCENE BUILDER - Scene 1: Time Meeting
+// ============================================================
+function buildScene1(onNext) {
+  const div = document.createElement('div');
+  div.className = 'scene';
+  div.innerHTML = `
+    <div class="scene1-bg">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260518104225_13_1146.png-aYAbw0ME1cVki8rM3oQhi5ctITVkfl.jpeg" alt="童年小房间">
+      <div class="scene1-overlay"></div>
+    </div>
+    <div class="scene1-warp"><div class="scene1-warp-inner"></div></div>
+    <div id="s1-particles" class="particles"></div>
+    <div class="dialogue dialogue-right hidden" id="s1-d1">
+      <div class="dialogue-bubble"><p>给你，超甜的！</p></div>
+      <p class="dialogue-label">— 童年的自己</p>
+    </div>
+    <div class="dialogue dialogue-left hidden" id="s1-d2">
+      <div class="dialogue-bubble"><p>这味道...好熟悉...</p></div>
+      <p class="dialogue-label">— 成年的自己</p>
+    </div>
+    <div class="scene1-milk-btn hidden" id="s1-milk-btn">
+      <div class="scene1-milk-box"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260518105831_24_1146-jSukxcZQ9GqlZrQCzGH1AhGbbDOHON.png" alt="AD钙奶"></div>
+      <span class="scene1-milk-text">点击接过AD钙奶</span>
+    </div>
+    <div class="scene1-bottom-text"><p>原来，童年的快乐，一直都在</p></div>
+    <div class="scene1-sound hidden" id="s1-sound">
+      <div class="bars"><span class="bar bar-1"></span><span class="bar bar-2"></span><span class="bar bar-3"></span></div>
+      <span>儿童笑声 + 魔法过渡声</span>
+    </div>
+    <div class="scene1-float" style="left:16px;top:80px;animation-delay:0s">&#11088;</div>
+    <div class="scene1-float2" style="right:32px;top:64px;animation-delay:0.5s">&#127769;</div>
+  `;
+
+  createParticles(div.querySelector('#s1-particles'), 25, ['#FFD700','#FFF8DC','#FFFACD']);
+
+  const d1 = div.querySelector('#s1-d1'), d2 = div.querySelector('#s1-d2');
+  const milkBtn = div.querySelector('#s1-milk-btn'), soundEl = div.querySelector('#s1-sound');
+
+  setTimeout(() => {
+    d1.classList.remove('hidden');
+    if (AudioEngine.isReady) AudioEngine.playSound('sparkle');
+  }, 1000);
+  setTimeout(() => {
+    d2.classList.remove('hidden');
+    soundEl.classList.remove('hidden');
+    if (AudioEngine.isReady) AudioEngine.playSound('ambient');
+  }, 2500);
+  setTimeout(() => {
+    milkBtn.classList.remove('hidden');
+    if (AudioEngine.isReady) AudioEngine.playSound('laugh');
+  }, 4000);
+
+  milkBtn.addEventListener('click', () => {
+    if (AudioEngine.isReady) { AudioEngine.playSound('click'); AudioEngine.playSound('sparkle'); }
+    onNext();
+  });
+
+  return div;
+}
+
+// ============================================================
+// SCENE BUILDER - Scene 2: Play Together
+// ============================================================
+function buildScene2(onNext) {
+  const div = document.createElement('div');
+  div.className = 'scene';
+  div.style.flexDirection = 'column';
+
+  const images = [
+    'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260518104227_15_1146-IK6K1OyUUp7Fwg8B8NDTR4205elZIn.png',
+    'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260518104221_10_1146-LaqvGrwyXoDyXP2Az2Q1ZRwcMKI5SS.jpg'
+  ];
+  const stickers = ['&#127800;','&#11088;','&#127872;','&#128171;','&#127752;','&#127880;','&#127808;','&#10024;'];
+  const colors = ['#FFB6C1','#98FB98','#FFD700','#87CEEB'];
+
+  let currentView = 0;
+  let startX = 0, isDragging = false;
+
+  div.innerHTML = `
+    <div class="scene2-slider" id="s2-slider">
+      <div class="scene2-slide" id="s2-slide-0"><img src="${images[0]}" alt="一起装饰AD钙奶瓶"><div class="scene2-slide-overlay"></div></div>
+      <div class="scene2-slide" id="s2-slide-1"><img src="${images[1]}" alt="一起玩耍奔跑"><div class="scene2-slide-overlay"></div></div>
+    </div>
+    <div class="particles" id="s2-particles"></div>
+    <div class="scene2-airplane hidden" id="s2-plane">&#9992;&#65039;</div>
+    <div class="scene2-dots" id="s2-dots">
+      <button class="scene2-dot scene2-dot-active" data-idx="0"></button>
+      <button class="scene2-dot scene2-dot-inactive" data-idx="1"></button>
+    </div>
+    <div class="scene2-swipe-hint" id="s2-swipe-hint">
+      <span>滑动</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+    </div>
+    <div class="scene2-title" id="s2-title">
+      <div class="scene2-title-inner"><p id="s2-title-text">一起给AD钙奶贴贴纸、折纸飞机</p></div>
+    </div>
+    <div class="scene2-continue"><button class="scene2-continue-btn" id="s2-continue">继续旅程</button></div>
+    <div class="scene2-bottom-text"><p>不管几岁，童心未改，快乐不难</p></div>
+    <div class="scene2-sound" id="s2-sound">
+      <div class="bars"><span class="bar bar-1"></span><span class="bar bar-2"></span><span class="bar bar-3"></span></div>
+      <span>笑声 + 轻快音乐</span>
+    </div>
+  `;
+
+  // Stickers
+  const stickersContainer = document.createElement('div');
+  stickersContainer.className = 'particles';
+  stickersContainer.style.pointerEvents = 'none';
+  stickersContainer.style.position = 'absolute';
+  stickersContainer.style.inset = '0';
+  stickersContainer.style.zIndex = '4';
+  stickers.forEach((s, i) => {
+    const el = document.createElement('div');
+    el.className = 'scene2-sticker';
+    el.innerHTML = s;
+    el.style.left = (10 + i*12)%90 + '%';
+    el.style.top = (20 + (i%3)*25)%80 + '%';
+    el.style.animationDelay = i*0.3 + 's';
+    el.style.zIndex = '4';
+    stickersContainer.appendChild(el);
+  });
+  div.appendChild(stickersContainer);
+
+  createParticles(div.querySelector('#s2-particles'), 20, colors);
+
+  // Play laugh on entry
+  if (AudioEngine.isReady) AudioEngine.playSound('laugh');
+
+  // Auto-swipe after 4s
+  const autoSwipe = setTimeout(() => {
+    if (currentView < 1) { setView(1); if (AudioEngine.isReady) AudioEngine.playSound('swipe'); }
+  }, 4000);
+
+  function setView(idx) {
+    currentView = idx;
+    const slides = div.querySelectorAll('.scene2-slide');
+    slides.forEach((s, i) => { s.style.transform = `translateX(${(i-idx)*100}%)`; });
+    const dots = div.querySelectorAll('.scene2-dot');
+    dots.forEach((d, i) => {
+      d.className = 'scene2-dot ' + (i===idx ? 'scene2-dot-active' : 'scene2-dot-inactive');
+    });
+    const titleEl = div.querySelector('#s2-title-text');
+    titleEl.textContent = idx === 0 ? '一起给AD钙奶贴贴纸、折纸飞机' : '追着纸飞机在草坪上奔跑';
+    const plane = div.querySelector('#s2-plane');
+    plane.classList.toggle('hidden', idx !== 1);
+    if (idx === 1) div.querySelector('#s2-swipe-hint').style.display = 'none';
+  }
+
+  // Pointer events for drag/swipe
+  const slider = div.querySelector('#s2-slider');
+  slider.addEventListener('pointerdown', e => { startX = e.clientX; isDragging = true; slider.setPointerCapture(e.pointerId); });
+  slider.addEventListener('pointermove', e => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    const slides = div.querySelectorAll('.scene2-slide');
+    slides.forEach((s, i) => { s.style.transform = `translateX(calc(${(i-currentView)*100}% + ${dx}px))`; });
+  });
+  slider.addEventListener('pointerup', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 50) {
+      if (dx < 0 && currentView < 1) { setView(1); if (AudioEngine.isReady) AudioEngine.playSound('swipe'); }
+      else if (dx > 0 && currentView > 0) { setView(0); if (AudioEngine.isReady) AudioEngine.playSound('swipe'); }
+    } else {
+      // Snap back
+      setView(currentView);
+    }
+  });
+
+  // Dot clicks
+  div.querySelectorAll('.scene2-dot').forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.dataset.idx);
+      if (idx !== currentView) { setView(idx); if (AudioEngine.isReady) AudioEngine.playSound('click'); }
+    });
+  });
+
+  // Continue button
+  div.querySelector('#s2-continue').addEventListener('click', () => {
+    if (AudioEngine.isReady) { AudioEngine.playSound('click'); AudioEngine.playSound('sparkle'); }
+    clearTimeout(autoSwipe);
+    onNext();
+  });
+
+  return div;
+}
+
+// ============================================================
+// SCENE BUILDER - Scene 3: Magic Return
+// ============================================================
+function buildScene3(onNext) {
+  const div = document.createElement('div');
+  div.className = 'scene';
+  div.innerHTML = `
+    <div class="scene3-dissolve" id="s3-dissolve"></div>
+    <div id="s3-dissolve-particles" class="particles"></div>
+    <div class="scene3-bg" id="s3-bg">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260518104228_16_1146-doALyrDVwtG7D7eQhzxmMWosjW6pwq.png" alt="回到办公室">
+      <div class="scene3-overlay"></div>
+    </div>
+    <div class="scene3-warm" id="s3-warm"><div class="scene3-warm-inner"></div></div>
+    <div class="particles" id="s3-particles"></div>
+    <div class="scene3-colleague hidden" id="s3-colleague">
+      <div class="scene3-colleague-bubble"><p>累了就喝口甜的，找回快乐~</p></div>
+      <p class="scene3-colleague-label">— 贴心同事</p>
+    </div>
+    <div class="scene3-expression hidden" id="s3-expression"><div class="scene3-expression-inner">眼神明亮了</div></div>
+    <div class="scene3-receive hidden" id="s3-receive">
+      <div class="scene3-receive-box"><img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260518105831_24_1146-jSukxcZQ9GqlZrQCzGH1AhGbbDOHON.png" alt="同事递来的AD钙奶"></div>
+      <span class="scene3-receive-text">接过这份快乐</span>
+    </div>
+    <div class="scene3-bottom-text"><p>AD钙奶，唤醒童心，传递快乐</p></div>
+    <div class="scene3-sound hidden" id="s3-sound">
+      <div class="bars"><span class="bar bar-1"></span><span class="bar bar-2"></span><span class="bar bar-3"></span></div>
+      <span>音乐推向柔和高潮 + 笑声</span>
+    </div>
+  `;
+
+  createParticles(div.querySelector('#s3-dissolve-particles'), 40, ['#FFD700','#FFFFFF','#90EE90']);
+
+  if (AudioEngine.isReady) AudioEngine.playSound('magic');
+
+  setTimeout(() => { div.querySelector('#s3-bg').classList.add('scene-enter'); }, 100);
+  setTimeout(() => {
+    const expr = div.querySelector('#s3-expression');
+    expr.classList.remove('hidden');
+    div.querySelector('#s3-sound').classList.remove('hidden');
+    if (AudioEngine.isReady) AudioEngine.playSound('ambient');
+  }, 1500);
+  setTimeout(() => {
+    div.querySelector('#s3-colleague').classList.remove('hidden');
+    createParticles(div.querySelector('#s3-particles'), 10, ['#FFD700','#FFF8DC']);
+    if (AudioEngine.isReady) AudioEngine.playSound('sparkle');
+  }, 3000);
+  setTimeout(() => {
+    div.querySelector('#s3-receive').classList.remove('hidden');
+    if (AudioEngine.isReady) AudioEngine.playSound('laugh');
+  }, 3500);
+
+  div.querySelector('#s3-receive').addEventListener('click', () => {
+    if (AudioEngine.isReady) { AudioEngine.playSound('click'); AudioEngine.playSound('success'); }
+    onNext();
+  });
+
+  return div;
+}
+
+// ============================================================
+// SCENE BUILDER - Scene 4: Ending
+// ============================================================
+function buildScene4() {
+  const div = document.createElement('div');
+  div.className = 'scene';
+  div.innerHTML = `
+    <div class="scene4-bg">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260518104229_17_1146-Ts0fk3yMJcj1dH3Ug9E27KwgdZww7N.png" alt="办公室里的快乐氛围">
+      <div class="scene4-overlay"></div>
+    </div>
+    <div class="particles" id="s4-particles"></div>
+    <div class="scene4-hearts" id="s4-hearts"></div>
+    <div class="scene4-card">
+      <div class="scene4-product" id="s4-product">
+        <div class="scene4-product-glow"></div>
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260518105831_24_1146-jSukxcZQ9GqlZrQCzGH1AhGbbDOHON.png" alt="娃哈哈AD钙奶">
+      </div>
+      <div class="scene4-title">不管几岁，快乐万岁</div>
+      <div class="scene4-subtitle">娃哈哈AD钙奶，守护每一份童心</div>
+      <div class="scene4-tag"><p>一口酸甜，一生快乐</p></div>
+      <div class="scene4-actions">
+        <button class="scene4-btn-share" id="s4-share">分享快乐</button>
+        <button class="scene4-btn-buy" id="s4-buy">立即购买</button>
+      </div>
+    </div>
+    <div class="scene4-footer">
+      <p>娃哈哈 · 陪伴中国家庭的味道</p>
+      <div class="scene4-social">
+        <span class="s4-social-icon">&#128241;</span>
+        <span class="s4-social-icon">&#128172;</span>
+        <span class="s4-social-icon">&#128279;</span>
+      </div>
+    </div>
+    <button class="scene4-replay" id="s4-replay">重新体验</button>
+    <div class="scene4-sound">
+      <div class="bars"><span class="bar bar-1"></span><span class="bar bar-2"></span><span class="bar bar-3"></span></div>
+      <span>音乐收尾 + 温柔旁白</span>
+    </div>
+  `;
+
+  // Particles
+  createParticles(div.querySelector('#s4-particles'), 35, ['#FFD700','#FF69B4','#90EE90','#87CEEB','#FFA500']);
+
+  // Floating hearts/stars
+  const heartsContainer = div.querySelector('#s4-hearts');
+  const heartEmojis = ['&#10084;&#65039;','&#11088;','&#129371;','&#10024;','&#128155;','&#127775;'];
+  for (let i=0;i<12;i++) {
+    const el = document.createElement('div');
+    el.className = 'scene4-heart';
+    el.innerHTML = heartEmojis[i % 6];
+    el.style.left = (5 + i*8)%95 + '%';
+    el.style.bottom = '30%';
+    el.style.animationDelay = i*0.3 + 's';
+    heartsContainer.appendChild(el);
+  }
+
+  // Success sound
+  if (AudioEngine.isReady) setTimeout(() => AudioEngine.playSound('success'), 500);
+
+  div.querySelector('#s4-share').addEventListener('click', () => {
+    const btn = div.querySelector('#s4-share');
+    btn.textContent = '已分享';
+    btn.disabled = true;
+    if (AudioEngine.isReady) { AudioEngine.playSound('sparkle'); AudioEngine.playSound('success'); }
+    if (navigator.share) {
+      navigator.share({
+        title: '娃哈哈AD钙奶 - 不管几岁，快乐万岁',
+        text: '一瓶AD钙奶，唤醒藏在心底的童心',
+        url: window.location.href
+      }).catch(() => {});
+    }
+  });
+
+  div.querySelector('#s4-buy').addEventListener('click', () => {
+    if (AudioEngine.isReady) AudioEngine.playSound('click');
+    window.open('https://www.wahaha.com.cn', '_blank');
+  });
+
+  div.querySelectorAll('.s4-social-icon').forEach(el => {
+    el.addEventListener('click', () => { if (AudioEngine.isReady) AudioEngine.playSound('click'); });
+  });
+
+  div.querySelector('#s4-replay').addEventListener('click', () => {
+    if (AudioEngine.isReady) AudioEngine.playSound('click');
+    window.location.reload();
+  });
+
+  return div;
+}
+
+// ============================================================
+// MAIN APP
+// ============================================================
+const App = (() => {
+  const app = document.getElementById('app');
+  let currentScene = 0;
+  let isTransitioning = false;
+
+  const sceneBuilders = [buildScene0, buildScene1, buildScene2, buildScene3, buildScene4];
+
+  function renderScene(idx) {
+    app.innerHTML = '';
+    const scene = sceneBuilders[idx](() => goToNext());
+    scene.classList.add('scene-enter');
+    app.appendChild(scene);
+  }
+
+  function goToNext() {
+    if (isTransitioning || currentScene >= 4) return;
+    isTransitioning = true;
+
+    // Show magic overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'magic-overlay';
+    const particleDiv = document.createElement('div');
+    particleDiv.className = 'particles';
+    overlay.appendChild(particleDiv);
+    const sparkle = document.createElement('div');
+    sparkle.className = 'magic-sparkle';
+    sparkle.textContent = '\u2728';
+    overlay.appendChild(sparkle);
+    document.body.appendChild(overlay);
+
+    createParticles(particleDiv, 50, ['#FFD700', '#FFA500', '#FFFF00', '#00FF00', '#87CEEB']);
+
+    if (AudioEngine.isReady) {
+      AudioEngine.playSound('transition');
+      AudioEngine.playSound('sparkle');
+    }
+
+    setTimeout(() => {
+      currentScene++;
+      renderScene(currentScene);
+      overlay.classList.add('magic-overlay-out');
+      setTimeout(() => { overlay.remove(); isTransitioning = false; }, 500);
+    }, 800);
+  }
+
+  // Keyboard nav
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goToNext(); }
+  });
+
+  // Audio controls
+  function renderAudioControls() {
+    const existing = document.querySelector('.audio-btn');
+    if (existing) existing.remove();
+    const existingVol = document.querySelector('.volume-indicator');
+    if (existingVol) existingVol.remove();
+
+    if (!AudioEngine.isReady) {
+      const btn = document.createElement('button');
+      btn.className = 'audio-btn audio-btn-init';
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg><span>开启音效</span>';
+      btn.addEventListener('click', () => { AudioEngine.init(); renderAudioControls(); });
+      document.body.appendChild(btn);
+    } else {
+      const container = document.createElement('div');
+      container.style.cssText = 'position:fixed;right:16px;top:16px;z-index:50';
+
+      const btn = document.createElement('button');
+      btn.className = 'audio-btn audio-btn-toggle';
+      btn.innerHTML = AudioEngine.isMuted
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>';
+      btn.addEventListener('click', () => { AudioEngine.toggleMute(); renderAudioControls(); });
+      container.appendChild(btn);
+
+      container.addEventListener('mouseenter', () => {
+        if (!AudioEngine.isMuted) {
+          const vol = document.createElement('div');
+          vol.className = 'volume-indicator';
+          vol.innerHTML = '<span>音乐播放中</span><div class="bars" style="animation:barsPulse 1s ease-in-out infinite"><span class="bar bar-1" style="background:#22c55e"></span><span class="bar bar-2" style="background:#22c55e"></span><span class="bar bar-3" style="background:#22c55e"></span></div>';
+          container.appendChild(vol);
+        }
+      });
+      container.addEventListener('mouseleave', () => {
+        const vol = container.querySelector('.volume-indicator');
+        if (vol) vol.remove();
+      });
+
+      document.body.appendChild(container);
+    }
+  }
+
+  AudioEngine.subscribe(renderAudioControls);
+
+  // Init
+  renderScene(0);
+  renderAudioControls();
+
+  return {};
+})();
+</script>
+</body>
+</html>
